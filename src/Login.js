@@ -1,5 +1,4 @@
-import React from 'react'
-import Loader from './Loader';
+import React, {useState} from 'react'
 import './Login.css';
 
 function Login() {
@@ -7,7 +6,9 @@ function Login() {
   return (
     <div className='background'>         
             <div className='small-body'>
-                
+                <h2>Log in</h2>
+                <div className='input-bar'><input type='text' placeholder='Username'/></div>
+                <div className='input-bar'><input type='password' placeholder='Password'/></div>
             </div>
         
     </div>
@@ -16,9 +17,3 @@ function Login() {
 
 export default Login
 
-// git init
-// git add README.md
-// git commit -m "first commit"
-// git branch -M main
-// git remote add origin https://github.com/vyshnavsmenon/Aisat-Store.git
-// git push -u origin main

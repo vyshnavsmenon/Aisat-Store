@@ -2,12 +2,23 @@
     width: 100%;
     height: 100vh;
     display: flex;    
-    justify-content: center;
-    align-items: center;
+    justify-content: center;    
 }
 
 .small-body{
     width: 500px;
     height: 500px;    
     background-color: #043565;
+    opacity: 50%;
+    margin-top: 30px;    
+    color: white;
+    text-align: center;
+}
+
+h2{
+    padding-top: 10px;
+}
+
+.input-bar{
+    
 }
