@@ -6,8 +6,8 @@ function Navbar() {
   return (
     <div className='navbar'>
         <div className='first-portion'>
-            <div className='logo'>
-                <label>ALBERTIAN INSTITUTE OF SCIENCE AND TECHNOLOGY(AISAT)</label>
+            <div className='logo'>                
+                <label>ALBERTIAN INSTITUTE OF SCIENCE AND TECHNOLOGY(AISAT)</label>                
             </div>
         </div>
         <div className='last-portion'>
@@ -19,7 +19,7 @@ function Navbar() {
                     <Link className='list' to="/login">Login</Link>
                 </li>
                 <li>
-                    <Link className='list'>Sign Up</Link>
+                    <Link className='list' to="/signup">Sign Up</Link>
                 </li>
                 <li>
                     <Link className='list'>Profile</Link>
