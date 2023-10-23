@@ -1,0 +1,21 @@
+.profile{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center;     */
+    height: 100vh;        
+    z-index: 1; 
+}
+
+.heading{
+    width: 350px;
+    border-bottom:2px solid white ;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-icon{
+    padding-top: 16px;
+}
+
+

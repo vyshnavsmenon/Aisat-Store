@@ -4,7 +4,7 @@ import {auth, database} from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import {useNavigate} from 'react-router-dom';
-
+import './Signup.css'
 
 function Signup() {
 
@@ -52,14 +52,19 @@ function Signup() {
       console.error('Error in signup:', error.message);
     }
   }
+
+  // function handleImage(e){
+
+  // }
   return (
     <div className='background'>
-      <div className='small-body'>
+      <div className='small-body1'>
         <h2>Sign Up</h2>
         <div><input onChange={handleFullname} className='input-bar' type='text' placeholder='Full Name'/></div>
         <div><input onChange={handleEmailid} className='input-bar' type='text' placeholder='Email id'/></div>
         <div><input onChange={handleUsername} className='input-bar' type='text' placeholder='Username'/></div>
-        <div><input onChange={handlePassword} className='input-bar' type='text' placeholder='Password'/></div>
+        <div><input onChange={handlePassword} className='input-bar' type='password' placeholder='Password'/></div>
+        {/* <div>Profile Picture: <input onChange={handleImage} className='input-bar' type='file'/></div> */}
         <div><button onClick={handleSignup} className='login'>Create account</button></div>
       </div>
     </div>

@@ -1,0 +1,11 @@
+.small-body1{
+    width: 350px;
+    height: 600px;    
+    background-color: #043565;    
+    margin-top: 1rem;    
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
