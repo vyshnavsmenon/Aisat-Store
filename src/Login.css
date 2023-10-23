@@ -54,3 +54,9 @@ h2{
     border-style: none;
     color: white;
 }
+
+.toast-container{
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}

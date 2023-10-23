@@ -5,6 +5,8 @@ import { auth, database } from './firebase';
 import { QuerySnapshot, collection, getDocs, query, where } from 'firebase/firestore';
 import { useCookies } from 'react-cookie';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function Login() {
     const [isLoading, setIsLoading] = useState(false);
@@ -36,32 +38,37 @@ function Login() {
                 const docSnapshot = querySnapshot.docs[0];
                 const docId = docSnapshot.id;
                 setCookie("user-id", docId, {path : "/"});
-                navigate('/');
+                navigate('/');                
               }
               else{
-                console.log("Error logging in");
+                toast.error("User not found");
               }
+              
             })
             .catch((error) => {
-              console.error("Error in loggin in: ",error);
+              toast.error(error.message);
             })
         })
         .catch((Error) => {
-          console.error("Error in loggin in: ", Error);
+          toast.error(Error.message);
         })
+        toast.success("Successfully logged in!");
     }
-  return (
-    <div className='background'>         
-            <div className='small-body'>
-                <h2>Log in</h2>
-                <div><input className='input-bar' type='text' placeholder='Email id' onChange={readUsername}/></div>
-                <div><input className='input-bar' type='password' placeholder='Password' onChange={readPassword}/></div>
-                <div><button onClick={handleLogin} className='login'>Log in</button></div>
-                <div><button className='createAccount' onClick={handleSignup}>Create an account</button></div>
-            </div>
-        
-    </div>
-  )
+      return (
+        <>
+          {<ToastContainer className='toast-contianer'/>}
+          <div className='background'>         
+              <div className='small-body'>
+                  <h2>Log in</h2>
+                  <div><input className='input-bar' type='text' placeholder='Email id' onChange={readUsername}/></div>
+                  <div><input className='input-bar' type='password' placeholder='Password' onChange={readPassword}/></div>
+                  <div><button onClick={handleLogin} className='login'>Log in</button></div>
+                  <div><button className='createAccount' onClick={handleSignup}>Create an account</button></div>
+              </div>            
+          </div>
+          
+        </>
+      )
 }
 
 export default Login
