@@ -48,11 +48,11 @@ function Login() {
             .catch((error) => {
               toast.error(error.message);
             })
+            toast.success("Successfully logged in!");
         })
         .catch((Error) => {
           toast.error(Error.message);
-        })
-        toast.success("Successfully logged in!");
+        })        
     }
       return (
         <>
