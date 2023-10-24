@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { database } from './firebase';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCookies } from 'react-cookie';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { arrayRemove } from 'firebase/firestore';
 
 function Favorites() {
   const [cookie,setCookie] = useCookies(["user-id"]);
@@ -47,13 +49,29 @@ function Favorites() {
       ],
     });
   }
+  async function handleDelete(product,index){
+    try{
+      const userid = cookie['user-id'];
+
+    const userDocRef = doc(database, "Users", userid);
+    await updateDoc(userDocRef, {
+      audioFiles : arrayRemove(product)
+    });
+
+    setFavProduct((prev) => prev.filter((_,i) => i != index));   
+  }
+  catch(error) {
+    // toast.error("Error : ", error);
+  }
+}
   return (
     <div className='home'>
-      {favProducts.map((product) => (
+      {favProducts.map((product,index) => (
       <div key={product.id} className='items'> 
         <img src={product.ProductImage} alt="Product Image" />
         <div className='product-details'>{product.FavoriteProduct}<br/>{product.ProductDetails}</div>
         <div className='icon' onClick={() => {goToCart(product)}}><AddShoppingCartIcon /></div>
+        <div className='icon1'><DeleteIcon onClick={() => {handleDelete(product,index)}}/></div>
         {/* <div className='favorites-icon' onClick={() => handlefavorites(x,index)}>
           <FavoriteIcon className={isClicked[index] ? 'clicked' : ''} />
         </div> */}
