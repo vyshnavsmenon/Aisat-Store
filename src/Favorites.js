@@ -6,6 +6,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCookies } from 'react-cookie';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { arrayRemove } from 'firebase/firestore';
+import './Favorites.css';
+import Navbar from './Navbar';
 
 function Favorites() {
   const [cookie,setCookie] = useCookies(["user-id"]);
@@ -55,7 +57,7 @@ function Favorites() {
 
     const userDocRef = doc(database, "Users", userid);
     await updateDoc(userDocRef, {
-      audioFiles : arrayRemove(product)
+      product : arrayRemove(product)
     });
 
     setFavProduct((prev) => prev.filter((_,i) => i != index));   
@@ -65,6 +67,8 @@ function Favorites() {
   }
 }
   return (
+    <>
+    <Navbar showNavbar={true}/>    
     <div className='home'>
       {favProducts.map((product,index) => (
       <div key={product.id} className='items'> 
@@ -78,6 +82,7 @@ function Favorites() {
       </div>
     ))}      
     </div>
+    </>
   )
 }
 

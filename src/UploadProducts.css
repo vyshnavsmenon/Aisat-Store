@@ -1,0 +1,12 @@
+.Product-small-body{
+        width: 400px;
+        height: 700px;    
+        background-color: #043565;    
+        margin-top: 30px;    
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    
+}

@@ -8,6 +8,11 @@ import Cart from './Cart';
 import Favorites from './Favorites';
 import Profile from './Profile';
 import Logout from './Logout';
+import Main from './Main';
+import StaffHomePage from './StaffHomePage';
+import UploadProducts from './UploadProducts';
+import UpdateStock from './UpdateStock';
+import StaffLogin from './StaffLogin';
 
 function App() {
   return (
@@ -22,6 +27,11 @@ function App() {
           <Route path='/favorites' element={<Favorites/>}/>
           <Route path='/profile' element={<Profile/>} />
           <Route path='/logout' element={<Logout/>} />
+          <Route path='/home' element={<Main/>}/>
+          <Route path='/staffHomePage' element={<StaffHomePage/>}/>
+          <Route path='/uploadProducts' element={<UploadProducts/>}/>
+          <Route path='/updateStock' element={<UpdateStock/>} />
+          <Route path='/stafflogin' element={<StaffLogin/>} />
         </Routes>      
     </>
   )

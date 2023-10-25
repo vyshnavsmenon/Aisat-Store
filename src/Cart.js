@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { database } from './firebase';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { arrayRemove } from 'firebase/firestore';
+import Navbar from './Navbar';
 
 function Cart() {
   const [cookie,] = useCookies(["user-id"]);
@@ -44,7 +45,7 @@ function Cart() {
 
     const userDocRef = doc(database, "Users", userid);
     await updateDoc(userDocRef, {
-      audioFiles : arrayRemove(x)
+      Cart : arrayRemove(x)
     });
 
     setCartProducts((prev) => prev.filter((_,i) => i != index));   
@@ -54,19 +55,22 @@ function Cart() {
   }
   }
   return (
-    <div className='home'>
-      {cartProducts.map((x,index) => (
-        <div key={x.id} className='items'> 
-          <img src={x.ProductImage} alt="Product Image" />
-          <div className='product-details'>{x.CartProduct}<br/>{x.ProductDetails}</div>
-          <div className='icon'><DeleteIcon onClick={() => {handleDelete(x,index)}}/></div>
-          {/* <div className='icon' onClick={goToCart}><AddShoppingCartIcon /></div> */}
-          {/* <div className='favorites-icon' onClick={() => handlefavorites(x,index)}>
-            <FavoriteIcon className={isClicked[index] ? 'clicked' : ''} />
-          </div> */}
-        </div>
-      ))}      
-    </div>
+    <>
+      <Navbar showNavbar={true}/>    
+      <div className='home'>
+        {cartProducts.map((x,index) => (
+          <div key={x.id} className='items'> 
+            <img src={x.ProductImage} alt="Product Image" />
+            <div className='product-details'>{x.CartProduct}<br/>{x.ProductDetails}</div>
+            <div className='icon'><DeleteIcon onClick={() => {handleDelete(x,index)}}/></div>
+            {/* <div className='icon' onClick={goToCart}><AddShoppingCartIcon /></div> */}
+            {/* <div className='favorites-icon' onClick={() => handlefavorites(x,index)}>
+              <FavoriteIcon className={isClicked[index] ? 'clicked' : ''} />
+            </div> */}
+          </div>
+        ))}      
+      </div>      
+    </>
   )
 }
 

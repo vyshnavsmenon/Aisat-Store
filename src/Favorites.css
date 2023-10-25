@@ -1,0 +1,13 @@
+.icon1{
+    color: white !important;
+    width: 30px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(000, 0, 0, 0.5);    
+    color: #868383;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -47px;
+    position: absolute;
+}

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { database } from './firebase';
 import './Profile.css'
 import CreateIcon from '@mui/icons-material/Create';
+import Navbar from './Navbar';
 
 function Profile() {
   const [data,setData] = useState([]);
@@ -35,6 +36,8 @@ function Profile() {
     fetchData();
   }, [])
   return (
+    <>
+    <Navbar showNavbar={true}/>
     <div className='profile'>
      <div className='small-body'>
       <div className='heading'>
@@ -45,6 +48,7 @@ function Profile() {
       <div><h4>Email id : {data.Emailid}</h4></div> 
     </div>     
     </div>
+    </>
   )
 }
 

@@ -7,9 +7,10 @@ import { useCookies } from 'react-cookie';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import Navbar from './Navbar';
 
 function Login() {
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const [emailid, setEmailid] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Login() {
                 const docSnapshot = querySnapshot.docs[0];
                 const docId = docSnapshot.id;
                 setCookie("user-id", docId, {path : "/"});
-                navigate('/');                
+                navigate('/home');                
               }
               else{
                 toast.error("User not found");
@@ -56,6 +57,7 @@ function Login() {
     }
       return (
         <>
+          <Navbar showNavbar={true}/>
           {<ToastContainer className='toast-contianer'/>}
           <div className='background'>         
               <div className='small-body'>

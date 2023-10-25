@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom';
 import './Logout.css'
+import Navbar from './Navbar';
 
 function Logout() {
     const [cookie, setCookie, removeCookie] = useCookies(["user-id"]);
@@ -22,7 +23,9 @@ function Logout() {
         navigate('/login');
     }
   return (
-    <div className='logout'>
+    <>
+        <Navbar showNavbar={true}/>
+        <div className='logout'>
         <div className='small'>
             <label>Do you want to Logout?</label>
             <div className='control-btns'>
@@ -30,7 +33,8 @@ function Logout() {
                 <button onClick={goToHomePage} className='logout-btns'>No</button>
             </div>
         </div>
-    </div>
+        </div>
+    </>
   )
 }
 

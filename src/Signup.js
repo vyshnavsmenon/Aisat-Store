@@ -6,6 +6,7 @@ import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import {useNavigate} from 'react-router-dom';
 import './Signup.css'
 import { ToastContainer, toast } from 'react-toastify';
+import Navbar from './Navbar';
 
 function Signup() {
 
@@ -61,6 +62,7 @@ function Signup() {
   // }
   return (
     <>
+      <Navbar showNavbar={true}/>
       {<ToastContainer/>}
       <div className='background'>
         <div className='small-body1'>
@@ -78,3 +80,5 @@ function Signup() {
 }
 
 export default Signup
+
+// eda ....cart ilaan pblm  chat il vaa.. sessoin chat..

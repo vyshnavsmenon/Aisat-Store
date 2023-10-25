@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function Navbar() {
+function Navbar({showNavbar}) {
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleSidebar(){
@@ -17,23 +17,25 @@ function Navbar() {
 
     useEffect(() => {
         let handler = (e) => {
-            if(!sidebarRef.current.contains(e.target)){
-                if(isOpen){
+            if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+                if (isOpen) {
                     setIsOpen(false);
                 }
             }
         }
-
+    
         document.addEventListener("mousedown", handler);
-
-    return () => {
-        // Cleanup the event listener when component is unmounted
-        document.removeEventListener("mousedown", handler);
-    };
-}, [isOpen]);
+    
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        };
+    }, [isOpen]);
+    
   return (
     <>
-        <div className='navbar'>
+        { showNavbar && (
+            <>
+            <div className='navbar'>
             <div className='first-portion'>
                 <div className='logo'>                
                     <label>ALBERTIAN INSTITUTE OF SCIENCE AND TECHNOLOGY(AISAT)</label>                
@@ -42,7 +44,7 @@ function Navbar() {
             <div className='last-portion'>
                 <ul>
                     <li>
-                        <Link className='list' to="/">Home</Link>
+                        <Link className='list' to="/home">Home</Link>
                     </li>
                     <li>
                         <Link className='list' to="/login">Login</Link>
@@ -87,6 +89,8 @@ function Navbar() {
                 </li>
             </ul>
       </div>
+      </>
+        )}
     </>
   )
 }
