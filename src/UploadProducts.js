@@ -9,7 +9,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import './UploadProducts.css';  
 
 function UploadProducts() {
-
+  const filename = Math.floor(Date.now() / 1000);
   const [productID, setProductID] = useState(0);
   const [productName, setProductName] = useState();
   const [price, setPrice] = useState(0);
@@ -43,7 +43,7 @@ function UploadProducts() {
     setStock(e.target.value);
   }
   async function handleUpload() {
-    const storageRef = ref(Storage, `/files/${file}`);
+    const storageRef = ref(storage, `/file1/${filename}`);
     console.log("Storageref: ", storageRef)
     setImageProgress(prev => !prev);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -51,7 +51,7 @@ function UploadProducts() {
       "state_changed",
       (snapshot) => {
         const percentage = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        toast.success("Upload is " + percentage + "% done");
+        // toast.success("Upload is " + percentage + "% done");
         setImageProgress(percentage);
       },
       (error) => {
@@ -60,23 +60,25 @@ function UploadProducts() {
       () => {
         setImageProgress(prev => !prev);
         // Upload completed successfully, get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          setImageUrl(url);
-          console.log("Image url:", imageUrl);
-      })  
-  })
-  let productData = await getDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"));
-  await updateDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"),{
-    Products: [
-      ...productData.data().Products, {
-        ProductID: productID,
-        Name: productName,
-        Price : price,
-        Stock : stock,
-        ImageUrl : imageUrl
+        getDownloadURL(uploadTask.snapshot.ref).then(async(url) => {
+          // setImageUrl(url);
+          // console.log("Image url:", imageUrl);
+          let productData = await getDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"));
+            await updateDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"),{
+            Products: [
+              ...productData.data().Products, {
+                ProductID: productID,
+                Name: productName,
+                Price : price,
+                Stock : stock,
+                ImageUrl : url
       }
     ]
   })
+      })  
+  })
+  
+  toast.success("Uploaded successfully");
   }
   
   

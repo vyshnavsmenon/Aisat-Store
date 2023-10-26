@@ -7,6 +7,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { database } from './firebase';
 import Navbar from './Navbar';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 function Main() {
   const [cookie, setCookie] = useCookies(["user-id"]);
@@ -14,6 +16,8 @@ function Main() {
   const [data, setData] = useState([]);
   const [userProduct, setUserProduct] = useState([])
   const navigate = useNavigate();
+  const [value, setValue] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const userid = cookie['user-id'];
@@ -56,6 +60,14 @@ function Main() {
       navigate('/login');
     }
   }, [cookie]);
+
+  useEffect(() => {
+    async function fetchData(){
+      const response = await getDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"));
+      const productData = response.data().Products || []
+      setCount(productData.Count);
+    }
+  }, [])
   
 
   async function handleAddToCart(product, index) {
@@ -134,7 +146,8 @@ function Main() {
             ProductDetails: product.Price,
             ProductImage: product.ImageUrl,
             ProductID: product.ProductID,
-            Stock: product.Stock
+            Stock: product.Stock,
+            Count : value
           },
         ],
       });
@@ -145,17 +158,42 @@ function Main() {
     }
   }
 
+  async function incrementValue(product){
+    setValue(value+1);
+    const productData = await getDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"))
+    const pdtData = productData.data().Products;
+    const bool = pdtData.find((Item) => Item.ProductID === product.ProductID)
+    if(bool){
+      bool.Count = value+1;
+      await updateDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"),{        
+          Products: pdtData        
+      })
+    }
+  }
+  async function decremenentValue(product){
+    setValue(value-1);
+    const productData = await getDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"))
+    const pdtData = productData.data().Products;
+    const bool = pdtData.find((Item) => Item.ProductID === product.ProductID)
+    if(bool){
+      bool.Count = value-1;
+      await updateDoc(doc(database, 'Products', "X5xa4y5EAkbPlaeEGBYp"),{        
+          Products: pdtData        
+      })
+    }
+  }
+
   return (
     <>      
       <Navbar showNavbar={true}/>
       <div className='home1'>
-      <div className='home'>
-        {data.map((product, index) => (
-          <div key={product.ProductID} className='items'>
-            <img src={product.ImageUrl} alt="Product Image" />
+      <div className='outerdiv'>
+      {data.map((product, index) => (
+        <div className='product_outerdiv'>
+          <img src={product.ImageUrl} alt="Product Image" />                    
             <div className='product-details'>
               {product.Name}
-              <br />
+              <br/>
               {product.Price}
             </div>
             <div className='icon' onClick={() => handleAddToCart(product, index)}>
@@ -164,8 +202,11 @@ function Main() {
             <div className='favorites-icon' onClick={() => handleAddToFavorites(product, index)}>
               <FavoriteIcon className={isClicked[index] ? 'clicked' : ''} />
             </div>
-          </div>
-        ))}
+            <div className='product-count'><AddIcon className='add-icon' onClick={() => {incrementValue(product,index)}}/>
+          <input value={product.Count} type='text' className='update-value'/>
+          <RemoveIcon className='add-icon' onClick={() => {decremenentValue(product,index)}} /></div>
+        </div>
+      ))}        
       </div>
     </div>
     </>
