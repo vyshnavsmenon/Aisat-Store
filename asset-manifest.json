@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Aisat-Store/static/css/main.bf85bd5c.css",
-    "main.js": "/Aisat-Store/static/js/main.441bac7b.js",
+    "main.css": "/Aisat-Store/static/css/main.300ac6fa.css",
+    "main.js": "/Aisat-Store/static/js/main.fc05f2e0.js",
     "static/js/787.6d4313dd.chunk.js": "/Aisat-Store/static/js/787.6d4313dd.chunk.js",
     "index.html": "/Aisat-Store/index.html",
-    "main.bf85bd5c.css.map": "/Aisat-Store/static/css/main.bf85bd5c.css.map",
-    "main.441bac7b.js.map": "/Aisat-Store/static/js/main.441bac7b.js.map",
+    "main.300ac6fa.css.map": "/Aisat-Store/static/css/main.300ac6fa.css.map",
+    "main.fc05f2e0.js.map": "/Aisat-Store/static/js/main.fc05f2e0.js.map",
     "787.6d4313dd.chunk.js.map": "/Aisat-Store/static/js/787.6d4313dd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf85bd5c.css",
-    "static/js/main.441bac7b.js"
+    "static/css/main.300ac6fa.css",
+    "static/js/main.fc05f2e0.js"
   ]
 }
